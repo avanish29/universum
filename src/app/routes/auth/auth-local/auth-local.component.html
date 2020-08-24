@@ -1,0 +1,24 @@
+<div class="w-full h-full" fxLayout="row wrap">
+    <mat-card class="mat-elevation-z4 m-auto" style="max-width: 380px;">
+        <mat-card-title class="text-center m-b-24">Universum Account Login</mat-card-title>
+
+        <form class="form-field-full" [formGroup]="localLoginForm">
+
+            <mat-form-field appearance="outline">
+                <mat-label>User name</mat-label>
+                <input matInput placeholder="ng-matero" formControlName="username" required>
+                <mat-error *ngIf="username.invalid">Please enter <strong>user name</strong></mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Password</mat-label>
+                <input matInput placeholder="ng-matero" type="password" formControlName="password" required>
+                <mat-error *ngIf="password.invalid">Please enter <strong>password</strong></mat-error>
+            </mat-form-field>
+
+            <button class="w-full" mat-raised-button color="primary" [disabled]="localLoginForm.invalid" (click)="login()">Login</button>
+
+            <div class="m-t-16">Don't have an account ? Click<a routerLink="/auth/register"> here </a>to create one</div>
+        </form>
+    </mat-card>
+</div>

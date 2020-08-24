@@ -1,0 +1,33 @@
+@import 'math';
+@import 'long-shadow';
+
+.universum-error-wrap {
+  text-align: center;
+}
+
+.universum-error-code {
+  padding: 20px 0;
+  font-size: 150px;
+  text-shadow:
+    long-shadow(
+      $direction: 45deg,
+      $length: 60px,
+      $color: rgba(0, 0, 0, .03),
+      $fade: rgba(0, 0, 0, .0015),
+      $shadow-count: 20
+    );
+}
+
+.universum-error-title {
+  margin: 0 0 16px;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 32px;
+}
+
+.universum-error-message {
+  margin: 0 0 16px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 28px;
+}
