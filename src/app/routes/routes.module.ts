@@ -3,7 +3,7 @@ import { SharedModule } from '../shared/shared.module';
 import { RoutesRoutingModule } from './routes-routing.module';
 
 import { LocalAuthComponent } from './auth/auth-local/auth-local.component';
-import { RegisterComponent } from './register/register.component';
+import { RegisterComponent } from './auth/register/register.component';
 
 const COMPONENTS = [LocalAuthComponent, RegisterComponent];
 const COMPONENTS_DYNAMIC = [];

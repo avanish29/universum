@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AuthLayoutComponent } from '../theme/auth-layout/auth-layout.component';
 
-import { RegisterComponent } from './register/register.component';
+import { RegisterComponent } from './auth/register/register.component';
 import { LocalAuthComponent } from './auth/auth-local/auth-local.component';
 
 const routes: Routes = [

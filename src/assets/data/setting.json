@@ -1,0 +1,31 @@
+{
+    "theme" : "light",
+    "menu-position" : "side",
+    "supported-language": [
+        {
+            "code" : "en-US",
+            "lable" : "English (US)",
+            "translation" : "English (US)",
+            "dir" : "ltr",
+            "isSystemDefault" : true
+        }, {
+            "code" : "ar_AR",
+            "label" : "العربية",
+            "translation" : "Arabic",
+            "dir" : "rtl",
+            "isSystemDefault" : false
+        }, {
+            "code" : "hi_IN",
+            "label" : "हिन्दी",
+            "translation" : "Hindi",
+            "dir" : "ltr",
+            "isSystemDefault" : false
+        }, {
+            "code" : "ja_JP",
+            "label" : "日本語",
+            "translation" : "Japanese",
+            "dir" : "ltr",
+            "isSystemDefault" : false
+        }
+    ]
+}
