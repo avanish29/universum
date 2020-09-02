@@ -1,31 +1,32 @@
 {
     "theme" : "light",
-    "menu-position" : "side",
-    "supported-language": [
+    "menuPosition" : "side",
+    "formFieldAppearance" : "standard",
+    "supportedLanguages": [
         {
             "code" : "en-US",
-            "lable" : "English (US)",
+            "label" : "English (US)",
             "translation" : "English (US)",
             "dir" : "ltr",
-            "isSystemDefault" : true
+            "isDefault" : true
         }, {
             "code" : "ar_AR",
             "label" : "العربية",
             "translation" : "Arabic",
             "dir" : "rtl",
-            "isSystemDefault" : false
+            "isDefault" : false
         }, {
             "code" : "hi_IN",
             "label" : "हिन्दी",
             "translation" : "Hindi",
             "dir" : "ltr",
-            "isSystemDefault" : false
+            "isDefault" : false
         }, {
             "code" : "ja_JP",
             "label" : "日本語",
             "translation" : "Japanese",
             "dir" : "ltr",
-            "isSystemDefault" : false
+            "isDefault" : false
         }
     ]
 }

@@ -10,6 +10,7 @@ import { NgProgressHttpModule } from 'ngx-progressbar/http';
 import { NgProgressRouterModule } from 'ngx-progressbar/router';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ToastrModule } from 'ngx-toastr';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { PageHeaderComponent } from './components/page-header/page-header.component';
@@ -22,7 +23,8 @@ const THIRD_MODULES = [
   NgProgressRouterModule,
   NgProgressHttpModule,
   NgSelectModule,
-  ToastrModule
+  ToastrModule,
+  TranslateModule
 ];
 const COMPONENTS = [ BreadcrumbComponent, PageHeaderComponent, ErrorCodeComponent ];
 const COMPONENTS_DYNAMIC = [];

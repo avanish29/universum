@@ -19,7 +19,9 @@
       "@core" : ["app/core"],
       "@core/*" : ["app/core/*"],
       "@shared": ["app/shared"],
-      "@shared/*": ["app/shared/*"]
+      "@shared/*": ["app/shared/*"],
+      "@theme": ["app/theme"],
+      "@theme/*": ["app/theme/*"]
     }
   }
 }

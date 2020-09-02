@@ -1,3 +1,7 @@
-<div class="universum-auth-container">
-  <router-outlet></router-outlet>
+<div class="universum-header-above" [ngClass]="{'universum-header-white': settings.theme === 'light'}" [dir]="selectedLanguage.dir">
+  <ng-progress></ng-progress>
+  <app-header #header class="universum-header" [showBranding]="true"></app-header>
+  <div class="universum-content">
+    <router-outlet></router-outlet>    
+  </div>  
 </div>
