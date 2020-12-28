@@ -2,10 +2,12 @@ import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
 import { RoutesRoutingModule } from './routes-routing.module';
 
+import { DashboardComponent } from './dashboard/dashboard.component';
+
 import { LocalAuthComponent } from './auth/auth-local/auth-local.component';
 import { RegisterComponent } from './auth/register/register.component';
 
-const COMPONENTS = [LocalAuthComponent, RegisterComponent];
+const COMPONENTS = [DashboardComponent, LocalAuthComponent, RegisterComponent];
 const COMPONENTS_DYNAMIC = [];
 
 @NgModule({

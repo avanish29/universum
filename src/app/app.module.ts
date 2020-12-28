@@ -1,3 +1,4 @@
+import { UniversumMissingTranslationHandler } from './core/handler/UniversumMissingTranslationHandler';
 import { I18Service } from './core/bootstrap/i18.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -6,7 +7,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateModule, TranslateLoader, MissingTranslationHandler } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { CoreModule } from './core/core.module';
@@ -33,11 +34,8 @@ import { HttpInterceptorProviders } from '@core/interceptors'
 
     ToastrModule.forRoot(),
     TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useClass: I18Service,
-        deps: [HttpClient],
-      },
+      missingTranslationHandler: { provide: MissingTranslationHandler, useClass: UniversumMissingTranslationHandler },
+      loader: { provide: TranslateLoader, useClass: I18Service, deps: [HttpClient] },
     }),
   ],
   providers: [HttpInterceptorProviders, AppInitializerProviders],

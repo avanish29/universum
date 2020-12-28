@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 export interface MenuTag {
   color: string; // Background Color
@@ -28,6 +31,8 @@ export interface Menu {
 })
 export class MenuService {
   private menu$: BehaviorSubject<Menu[]> = new BehaviorSubject<Menu[]>([]);
+
+  constructor(private http: HttpClient) {}
 
   getAll(): Observable<Menu[]> {
     return this.menu$.asObservable();
@@ -128,6 +133,31 @@ export class MenuService {
       if (menuItem.children && menuItem.children.length > 0) {
         this.recursMenuForTranslation(menuItem.children, menuItem.name);
       }
+    });
+  }
+
+  loadMenu(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http
+        .get('assets/data/menu.json?_t=' + Date.now())
+        .pipe(
+          catchError(res => {
+            resolve(true);
+            return throwError(res);
+          })
+        )
+        .subscribe(
+          (res: any) => {
+            this.recursMenuForTranslation(res.menu, 'menu');
+            this.set(res.menu);
+          },
+          () => {
+            reject();
+          },
+          () => {
+            resolve(true);
+          }
+        );
     });
   }
 }

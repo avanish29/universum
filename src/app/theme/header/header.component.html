@@ -1,0 +1,22 @@
+<mat-toolbar class="universum-toolbar">
+  <button mat-icon-button class="universum-toolbar-button" *ngIf="showToggle" (click)="toggleSidenav.emit()">
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <app-branding *ngIf="showBranding"></app-branding>
+  <span fxFlex></span>
+
+  <button mat-icon-button class="universum-toolbar-button" *ngIf="isLoggedIn">
+    <mat-icon>search</mat-icon>
+  </button>
+
+  <button mat-icon-button class="universum-toolbar-button" fxHide.lt-sm (click)="toggleFullscreen()">
+    <mat-icon>fullscreen</mat-icon>
+  </button>
+
+  <app-notification fxHide.lt-sm *ngIf="isLoggedIn"></app-notification>
+
+  <app-translate></app-translate>
+
+  <app-user *ngIf="isLoggedIn"></app-user>  
+</mat-toolbar>

@@ -1,0 +1,24 @@
+{
+  "login": {
+      "title": "تسجيل الدخول",
+      "username.label": ":اسم المستخدم",
+      "username.placeholder": "ادخل اسم المستخدم",
+      "username.required": "اسم المستخدم مطلوب",
+      "password.label": ":كلمه السر",
+      "password.placeholder": "Enter password",
+      "password.required": "كلمة المرور مطلوبة",
+      "button.next.label": "تسجيل الدخول",
+      "button.registration.label": "تسجيل"
+  },
+  "menu": {
+    "dashboard": "لوحة القيادة",
+    "persons": "الأشخاص",
+    "persons.people": "اشخاص",
+    "persons.languages": "اللغات",
+    "admin": "ترتيب",
+    "admin.security": "الأمان",
+    "admin.security.roles": "الأدوار",
+    "admin.security.users": "المستخدمون",
+    "admin.labels": "حزم العقارات"
+  }
+}

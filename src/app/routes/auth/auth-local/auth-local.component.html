@@ -4,19 +4,19 @@
 
         <form class="form-field-full" [formGroup]="localLoginForm">
 
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="legacy">
                 <mat-label>{{'login.username.label' | translate}}</mat-label>
                 <input matInput placeholder="{{'login.username.placeholder' | translate}}" formControlName="username" required>
-                <mat-error *ngIf="username.invalid">{{'validation.required' | translate : '{ element: "user name" }'}}</mat-error>
+                <mat-error *ngIf="username.invalid">{{'login.username.required' | translate }}</mat-error>
             </mat-form-field>
 
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="legacy">
                 <mat-label>{{'login.password.label' | translate}}</mat-label>
                 <input matInput placeholder="{{'login.password.placeholder' | translate}}" type="password" formControlName="password" required>
-                <mat-error *ngIf="password.invalid">{{'validation.required' | translate : '{ element: "user name" }'}}</mat-error>
+                <mat-error *ngIf="password.invalid">{{'login.password.required' | translate }}</mat-error>
             </mat-form-field>
 
-            <button class="w-full" mat-raised-button color="primary" [disabled]="localLoginForm.invalid" (click)="login()">{{'login.button.login.label' | translate}}</button>
+            <button class="w-full" mat-raised-button color="primary" [disabled]="localLoginForm.invalid" (click)="login()">{{'login.button.next.label' | translate}}</button>
 
             <div class="m-t-16" [innerHTML]="'login.button.registration.label' | translate"></div>
         </form>

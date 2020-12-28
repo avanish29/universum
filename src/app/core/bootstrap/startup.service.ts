@@ -4,7 +4,6 @@ import { HttpClient } from '@angular/common/http';
 import { throwError, BehaviorSubject, Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
-import { MenuService } from '@core/bootstrap/menu.service';
 
 export interface SupportedLanguage {
     code: string;
@@ -14,9 +13,14 @@ export interface SupportedLanguage {
 }
 
 export interface SystemSetting {
-    theme: string;
-    menuPosition: string;
+    dir?: 'ltr' | 'rtl';
+    theme?: 'light' | 'dark';
+    menuPosition?: 'side' | 'top';
+    sidenavOpened: boolean;
+    sidenavCollapsed: boolean;
+    headerPos: 'above' | 'fixed' | 'static';
     formFieldAppearance: 'legacy' | 'standard' | 'fill' | 'outline';
+    loginType: 'default' | 'sso' | 'ldap' | 'okta';
     supportedLanguages: SupportedLanguage[];
 }
 
@@ -27,7 +31,7 @@ export class StartupService {
     private currentLanguage : SupportedLanguage;
     private langChangeObs$: BehaviorSubject<SupportedLanguage> = new BehaviorSubject(null);
 
-    constructor(private menu: MenuService, private http: HttpClient, private translate: TranslateService) {}
+    constructor(private http: HttpClient, private translate: TranslateService) {}
 
     loadConfiguration(): Promise<SystemSetting>{
         return new Promise((resolve, reject) => {
@@ -35,7 +39,7 @@ export class StartupService {
             .get('assets/data/setting.json?_t=' + Date.now())
             .pipe(
             catchError(res => {
-                resolve();
+                resolve(null);
                 return throwError(res);
             })
             )
@@ -46,14 +50,15 @@ export class StartupService {
                     this.allLangsCode.push(language.code);
                     if(language.isDefault) this.currentLanguage = language;
                 });
+                this.settings.dir = this.currentLanguage.dir;
                 this.translate.addLangs(this.allLangsCode);
                 this.translate.setDefaultLang(this.currentLanguage.code);
             },
             () => {
                 reject();
             },
-            () => {
-                resolve();
+            () => {                
+                resolve(null);
             }
             );
         });
@@ -73,6 +78,19 @@ export class StartupService {
 
     getLangChangeObs(): Observable<SupportedLanguage> {
         return this.langChangeObs$.asObservable();
+    }
+
+    getSystemLoginType(): string {
+        let loginType : string = 'local';
+        switch(this.settings.loginType) {
+            case "sso":
+                loginType = 'sso';
+                break;
+            case "okta":
+                loginType = 'oauth';
+                break;
+        }
+        return loginType;
     }
 
     setCurrentLanguage(lang: string) : void {

@@ -1,0 +1,25 @@
+<div class="universum-container-wrap universum-header-fixed" [ngClass]="{'universum-sidenav-collapsed': settings.sidenavCollapsed && settings.menuPosition !== 'top',
+                 'universum-navbar-side': settings.menuPosition === 'side',
+                 'universum-navbar-top': settings.menuPosition === 'top',
+                 'universum-header-above': settings.headerPos === 'above',
+                 'universum-header-fixed': settings.headerPos === 'fixed',
+                 'universum-header-white': settings.theme === 'light'}" [dir]="selectedLanguage.dir">
+  <ng-progress></ng-progress>
+
+  <mat-sidenav-container class="universum-container" autosize autoFocus>
+    <mat-sidenav #sidenav class="universum-sidenav" [mode]="isOver ? 'over' : 'side'" [opened]="settings.menuPosition === 'side' && settings.sidenavOpened && !isOver"
+                 (openedChange)="sidenavOpenedChange($event)" (closedStart)="sidenavCloseStart()">
+      <app-sidebar [showToggle]="!isOver" [showHeader]="settings.headerPos!=='above'" (toggleCollapsed)="toggleCollapsed()" [toggleChecked]="settings.sidenavCollapsed"></app-sidebar>
+    </mat-sidenav>  
+
+    <mat-sidenav-content #content class="universum-content-wrap">
+      <app-header #header class="universum-header" [showToggle]="settings.menuPosition !== 'top'" [showBranding]="settings.menuPosition === 'top'" (toggleSidenav)="sidenav.toggle()"></app-header>
+
+      <app-topmenu *ngIf="settings.menuPosition === 'top'"></app-topmenu>
+
+      <div class="universum-content">
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

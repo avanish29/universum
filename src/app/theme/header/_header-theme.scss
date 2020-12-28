@@ -1,0 +1,16 @@
+@mixin universum-header-theme($theme) {
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  .universum-toolbar-button {
+    &.mat-icon-button {
+      &:hover {
+        background-color: mat-color($background, hover);
+      }
+    }
+  }
+
+  .universum-branding-name {
+    color: mat-color($foreground, text);
+  }
+}

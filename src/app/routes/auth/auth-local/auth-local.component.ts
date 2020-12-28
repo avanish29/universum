@@ -1,6 +1,7 @@
 import { OnInit, Component } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MenuService } from '@core';
 
 @Component({
   selector: 'app-local-auth',
@@ -9,10 +10,10 @@ import { Router } from '@angular/router';
 export class LocalAuthComponent implements OnInit {
   localLoginForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private router: Router) {
+  constructor(private formBuilder: FormBuilder, private router: Router, private menuService: MenuService) {
     this.localLoginForm = this.formBuilder.group({
-      username: ['', [Validators.required, Validators.pattern('ng-matero')]],
-      password: ['', [Validators.required, Validators.pattern('ng-matero')]],
+      username: ['', [Validators.required]],
+      password: ['', [Validators.required]],
     });
   }
 
@@ -27,5 +28,8 @@ export class LocalAuthComponent implements OnInit {
   }
 
   login() {
+    this.menuService.loadMenu().then(() => {
+      this.router.navigateByUrl('/');
+    })
   }
 }

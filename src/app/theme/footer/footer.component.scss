@@ -1,0 +1,48 @@
+.universum-footer {
+  width: 100%;
+  height: inherit;
+  background: #f2803c;
+  padding: .5rem 0 1rem 0;
+  > * { padding: 0 0 0 2rem; }
+  h2 { font-size: 1.4em; }
+  .universum-toolbar {
+    padding: 0 8px;
+  }
+
+  .universum-footer-fixed & {
+    position: sticky;
+    top: 0;
+  }
+}
+
+// Colorful
+.universum-footer-white {
+  .universum-toolbar,
+  .universum-topmenu {
+    background-color: white;
+  }
+}
+
+.docs-footer{
+  padding: 12px;
+  font-size: 12px;
+}
+.docs-footer {
+  background: #3f51b5;
+  color: #fff;
+}
+.docs-footer-list{
+  align-items: center;
+  display: flex;
+  flex-flow: row wrap;
+  padding: 8px;
+}
+.docs-footer-logo {
+  flex: 1;
+}
+.docs-footer-logo {
+  display: inline-block;
+  line-height: 50px;
+  margin: 0 40px;
+  vertical-align: bottom;
+}

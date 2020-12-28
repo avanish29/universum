@@ -29,7 +29,7 @@ $config: mat-typography-config();
 @include mat-core();
 
 @include angular-material-theme($theme);
-@include matero-admin-theme($theme);
+@include universum-admin-theme($theme);
 
 //
 // Demo purposes only
@@ -40,5 +40,5 @@ $config: mat-typography-config();
   $theme: mat-dark-theme($primary, $accent);
 
   @include angular-material-theme($theme);
-  @include matero-admin-theme($theme);
+  @include universum-admin-theme($theme);
 }

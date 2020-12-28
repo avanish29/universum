@@ -1,0 +1,24 @@
+{
+  "login": {
+      "title": "Login",
+      "username.label": "User name :",
+      "username.placeholder": "Enter user name",
+      "username.required": "User name is required",
+      "password.label": "Password :",
+      "password.placeholder": "Enter password",
+      "password.required": "Password is required",
+      "button.next.label": "Login",
+      "button.registration.label": "Register"
+  },
+  "menu": {
+    "dashboard": "Dashboard",
+    "persons": "Persons",
+    "persons.people": "People",
+    "persons.languages": "Languages",
+    "admin": "Configuration",
+    "admin.security": "Security",
+    "admin.security.roles": "Roles",
+    "admin.security.users": "Users",
+    "admin.labels": "Property Bundles"
+  }
+}

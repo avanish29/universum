@@ -1,31 +1,19 @@
 {
     "theme" : "light",
     "menuPosition" : "side",
+    "headerPos": "fixed",
     "formFieldAppearance" : "standard",
+    "loginType": "default",
     "supportedLanguages": [
         {
             "code" : "en-US",
             "label" : "English (US)",
-            "translation" : "English (US)",
             "dir" : "ltr",
             "isDefault" : true
         }, {
             "code" : "ar_AR",
             "label" : "العربية",
-            "translation" : "Arabic",
             "dir" : "rtl",
-            "isDefault" : false
-        }, {
-            "code" : "hi_IN",
-            "label" : "हिन्दी",
-            "translation" : "Hindi",
-            "dir" : "ltr",
-            "isDefault" : false
-        }, {
-            "code" : "ja_JP",
-            "label" : "日本語",
-            "translation" : "Japanese",
-            "dir" : "ltr",
             "isDefault" : false
         }
     ]

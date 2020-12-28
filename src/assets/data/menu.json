@@ -1,0 +1,58 @@
+{
+    "menu": [
+      {
+        "route": "dashboard",
+        "name": "dashboard",
+        "type": "link",
+        "icon": "dashboard"
+      },
+      {
+        "route": "pages",
+        "name": "persons",
+        "type": "sub",
+        "icon": "person",
+        "children": [
+          {
+            "route": "people",
+            "name": "people",
+            "type": "link"
+          },
+          {
+            "route": "languages",
+            "name": "languages",
+            "type": "link"
+          }
+        ]
+      },
+      {
+        "route": "admin",
+        "name": "admin",
+        "type": "sub",
+        "icon": "settings",
+        "children": [
+          {
+            "route": "",
+            "name": "security",
+            "type": "sub",
+            "children": [
+              {
+                "route": "roles",
+                "name": "roles",
+                "type": "link"
+              },
+              {
+                "route": "users",
+                "name": "users",
+                "type": "link"
+              }
+            ]
+          },
+          {
+            "route": "labels",
+            "name": "labels",
+            "type": "link"
+          }
+        ]
+      }
+    ]
+}
