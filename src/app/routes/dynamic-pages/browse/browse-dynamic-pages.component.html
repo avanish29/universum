@@ -1,0 +1,27 @@
+<page-header [title]="getPageTitle()" [subtitle]="getPageSubtitle()" [helpText]="getPageHelptext()" [showBreadCrumb]="true"></page-header>
+
+<div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="5px">
+  <mat-button-toggle-group #group="matButtonToggleGroup" value="grid">
+    <mat-button-toggle value="grid" aria-label="Grid View" matTooltip="Grid View">
+      <mat-icon>view_list</mat-icon>
+    </mat-button-toggle>
+    <mat-button-toggle value="tiles" aria-label="Tiles View" matTooltip="Tiles View">
+      <mat-icon>view_module</mat-icon>
+    </mat-button-toggle>
+  </mat-button-toggle-group>
+</div>
+
+<!-- <div class="example-container mat-elevation-z8">
+    <div class="example-loading-shade" *ngIf="isLoadingResults">
+      <mat-progress-bar mode="query" *ngIf="isLoadingResults"></mat-progress-bar>      
+    </div>
+  
+    <div class="example-table-container">
+  
+      <table mat-table [dataSource]="data" class="example-table" matSort matSortActive="created" matSortDisableClear matSortDirection="desc">
+        
+      </table>
+    </div>
+  
+    <mat-paginator [length]="resultsLength" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </div> -->

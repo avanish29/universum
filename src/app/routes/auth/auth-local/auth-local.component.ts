@@ -8,6 +8,7 @@ import { MenuService } from '@core';
   templateUrl: './auth-local.component.html'
 })
 export class LocalAuthComponent implements OnInit {
+  hidePassword : boolean = true;
   localLoginForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder, private router: Router, private menuService: MenuService) {

@@ -12,6 +12,7 @@
   },
   "menu": {
     "dashboard": "Dashboard",
+    "country": "Country",
     "persons": "Persons",
     "persons.people": "People",
     "persons.languages": "Languages",
@@ -20,5 +21,24 @@
     "admin.security.roles": "Roles",
     "admin.security.users": "Users",
     "admin.labels": "Property Bundles"
+  },
+  "admin": {
+    "security.users.title": "Users",
+    "security.users.subtitle": "",
+    "security.users.helptext": "In the user management, you can administrate users that are already in the System as well as add new users. Click on a user in order to edit their user role. Click on \"Add new User\" in order to add a new user. Import:User can import list of users given in a file in to the system. The allowed file extension is *.csv.The process includes the following steps:click on \"Add New\" and select “import from file” and from there you navigate to the user import page. Here the imported file is validated and shows error messages if the file is not met the validation rules. The file is imported successfully in to the system, when there are no validation errors and shows the status. Export:The user can export the list of users presented in the system by clicking the Export to CSV button and user will get a new pop for confirmation after clicking 'OK' button user can get the exported CSV file.",
+    "security.roles.title": "Roles",
+    "security.roles.subtitle": "",
+    "security.roles.helptext": ""
+  },
+  "pages": {
+    "languages.browse.title": "Languages",
+    "languages.browse.subtitle": "",
+    "languages.browse.helptext": "",
+    "people.browse.title": "People",
+    "people.browse.subtitle": "",
+    "people.browse.helptext": "",
+    "country.browse.title": "Country",
+    "country.browse.subtitle": "",
+    "country.browse.helptext": ""
   }
 }

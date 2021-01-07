@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 export class PageHeaderComponent implements OnInit {
   @Input() title = '';
   @Input() subtitle = '';
+  @Input() helpText = '';
   @Input() nav: string[] = [];
   @Input() showBreadCrumb = true;
 

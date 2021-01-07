@@ -7,18 +7,24 @@
         "icon": "dashboard"
       },
       {
+        "route": "pages/country/browse",
+        "name": "country",
+        "type": "link",
+        "icon": "business"
+      },
+      {
         "route": "pages",
         "name": "persons",
         "type": "sub",
         "icon": "person",
         "children": [
           {
-            "route": "people",
+            "route": "people/browse",
             "name": "people",
             "type": "link"
           },
           {
-            "route": "languages",
+            "route": "languages/browse",
             "name": "languages",
             "type": "link"
           }

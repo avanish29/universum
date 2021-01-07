@@ -26,6 +26,16 @@ const routes: Routes = [
         path: 'dashboard',
         component: DashboardComponent,
         data: { title: 'Dashboard', titleI18n: 'dashboard' },
+      },
+      {
+        path: 'admin',
+        loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
+        data: { title: 'Administration', titleI18n: 'admin' },
+      },
+      {
+        path: 'pages/:pageName',
+        loadChildren: () => import('./dynamic-pages/daynamic-pages.module').then(m => m.DynamicPagesModule),
+        data: { title: '{pageName}', titleI18n: '{pageName}' },
       }
     ]
   },
