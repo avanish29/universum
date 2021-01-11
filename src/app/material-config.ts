@@ -1,11 +1,10 @@
 import { MAT_DIALOG_DEFAULT_OPTIONS, MatDialogConfig } from '@angular/material/dialog';
 import { DateAdapter, MAT_DATE_LOCALE, MAT_DATE_FORMATS } from '@angular/material/core';
-import {
-  MomentDateAdapter,
-  MAT_MOMENT_DATE_ADAPTER_OPTIONS,
-} from '@angular/material-moment-adapter';
+import { MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
 import { MomentDatetimeAdapter } from '@mat-datetimepicker/moment';
 import { DatetimeAdapter, MAT_DATETIME_FORMATS } from '@mat-datetimepicker/core';
+import { MatPaginatorIntl } from '@angular/material/paginator';
+import { PaginatorI18n } from '@core';
 
 export const materialProviders = [
   {
@@ -61,4 +60,8 @@ export const materialProviders = [
       },
     },
   },
+  {
+    provide: MatPaginatorIntl,
+    useClass: PaginatorI18n,
+  }
 ];

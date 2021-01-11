@@ -1,4 +1,13 @@
 {
+  "core": {
+    "paginator.of.label": "of",
+    "paginator.items.perpage.label": "Items per page",
+    "paginator.first.page.label": "First page",
+    "paginator.last.page.label": "Last page",
+    "paginator.next.page.label": "Next page",
+    "paginator.previous.page.label": "Previous page",
+    "listview.norecords.label": "No Records Found!"
+  },
   "login": {
       "title": "Login",
       "username.label": "User name :",
@@ -23,12 +32,27 @@
     "admin.labels": "Property Bundles"
   },
   "admin": {
-    "security.users.title": "Users",
-    "security.users.subtitle": "",
-    "security.users.helptext": "In the user management, you can administrate users that are already in the System as well as add new users. Click on a user in order to edit their user role. Click on \"Add new User\" in order to add a new user. Import:User can import list of users given in a file in to the system. The allowed file extension is *.csv.The process includes the following steps:click on \"Add New\" and select “import from file” and from there you navigate to the user import page. Here the imported file is validated and shows error messages if the file is not met the validation rules. The file is imported successfully in to the system, when there are no validation errors and shows the status. Export:The user can export the list of users presented in the system by clicking the Export to CSV button and user will get a new pop for confirmation after clicking 'OK' button user can get the exported CSV file.",
-    "security.roles.title": "Roles",
-    "security.roles.subtitle": "",
-    "security.roles.helptext": ""
+    "security" : {
+      "users" : {
+        "title": "Users",
+        "subtitle": "",
+        "helptext": "In the user management, you can administrate users that are already in the System as well as add new users. Click on a user in order to edit their user role. Click on \"Add new User\" in order to add a new user. Import:User can import list of users given in a file in to the system. The allowed file extension is *.csv.The process includes the following steps:click on \"Add New\" and select “import from file” and from there you navigate to the user import page. Here the imported file is validated and shows error messages if the file is not met the validation rules. The file is imported successfully in to the system, when there are no validation errors and shows the status. Export:The user can export the list of users presented in the system by clicking the Export to CSV button and user will get a new pop for confirmation after clicking 'OK' button user can get the exported CSV file."
+      },
+      "roles" : {
+        "title": "Roles",
+        "subtitle": "",
+        "helptext": "",
+        "listview" : {
+          "columns" : {
+            "id.label" : "#",
+            "created.label" : "Created On",
+            "name.label" : "Name",
+            "description.label" : "Description",
+            "system.label" : "System"
+          }
+        }
+      }
+    }
   },
   "pages": {
     "languages.browse.title": "Languages",
