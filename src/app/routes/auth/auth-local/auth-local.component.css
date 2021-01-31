@@ -1,0 +1,26 @@
+.login-card-conatainer {
+    max-width: 450px;
+}
+
+.login-header-image {
+    background-image: url('../../../../assets/images/universum-logo.svg');
+    background-size: cover;
+}
+
+:host /deep/ .mat-card-header-text {
+    width: 100%;
+    margin-top: 15px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.mat-card-avatar {
+    height: 40px;
+    width: 40px;
+    border-radius: 0%;
+    flex-shrink: 0;
+    object-fit: cover;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 15px;
+}

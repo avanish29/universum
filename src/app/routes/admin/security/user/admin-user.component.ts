@@ -4,6 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { AdminUserDataService } from './admin-user.service';
 import {merge, of as observableOf} from 'rxjs';
 import {catchError, map, startWith, switchMap} from 'rxjs/operators';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 export interface GithubApi {
     items: GithubIssue[];
@@ -16,6 +17,12 @@ export interface GithubIssue {
     state: string;
     title: string;
 }
+
+interface LabelValue {
+    label: string;
+    value: string;
+}
+  
 
 @Component({
     selector: 'admin-security-users',
@@ -36,7 +43,23 @@ export class AdminUserComponent implements AfterViewInit {
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
 
-    constructor(private remoteSrv: AdminUserDataService, private cdr: ChangeDetectorRef) { }
+    userSearchForm: FormGroup;
+    searchByFields: LabelValue[] = [{label: 'User', value : 'user'}, {label: 'Email', value : 'email'}];
+
+    constructor(private formBuilder: FormBuilder, private remoteSrv: AdminUserDataService, private cdr: ChangeDetectorRef) { 
+        this.userSearchForm = this.formBuilder.group({
+            query: [''],
+            searchby: [''],
+          });
+    }
+
+    get query() {
+        return this.userSearchForm.get('query');
+    }
+
+    get searchby() {
+        return this.userSearchForm.get('searchby');
+    }
 
     ngAfterViewInit() {
         this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);

@@ -6,8 +6,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 
 import { LocalAuthComponent } from './auth/auth-local/auth-local.component';
 import { RegisterComponent } from './auth/register/register.component';
+import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
 
-const COMPONENTS = [DashboardComponent, LocalAuthComponent, RegisterComponent];
+const COMPONENTS = [DashboardComponent, LocalAuthComponent, RegisterComponent, ForgotPasswordComponent];
 const COMPONENTS_DYNAMIC = [];
 
 @NgModule({

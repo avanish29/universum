@@ -28,7 +28,7 @@ table {
 
 .example-rate-limit-reached {
   color: #980000;
-  max-width: 360px;
+  max-width: 100%;
   text-align: center;
 }
 
@@ -40,4 +40,8 @@ table {
 
 .mat-column-created {
   max-width: 124px;
+}
+
+.dull-icon {
+  color: rgb(178, 178, 178);
 }

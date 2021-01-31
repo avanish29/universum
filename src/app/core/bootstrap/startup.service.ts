@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { throwError, BehaviorSubject, Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
+import { environment } from './../../../environments/environment';
 
 export interface SupportedLanguage {
     code: string;
@@ -26,6 +27,7 @@ export interface SystemSetting {
 
 @Injectable({providedIn: 'root'})
 export class StartupService {
+    API_BASE_URL : string = environment.api_base_url;
     private settings: SystemSetting;
     private allLangsCode : Array<string> = [];
     private currentLanguage : SupportedLanguage;
@@ -36,7 +38,7 @@ export class StartupService {
     loadConfiguration(): Promise<SystemSetting>{
         return new Promise((resolve, reject) => {
             this.http
-            .get('assets/data/setting.json?_t=' + Date.now())
+            .get(this.API_BASE_URL + 'settings')
             .pipe(
             catchError(res => {
                 resolve(null);

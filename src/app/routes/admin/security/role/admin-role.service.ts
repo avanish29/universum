@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { PageResponse, Role } from './admin-role.model';
 
-const SECURITY_SERVICE_BASE_URL = 'http://localhost:8080/api/security-service';
+const SECURITY_SERVICE_BASE_URL = 'http://gateway-service:9090/api/security-service';
 const ROLES_PATH = '/roles';
 
 @Injectable()

@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthLayoutComponent } from '../theme/auth-layout/auth-layout.component';
 import { AdminLayoutComponent } from '../theme/admin-layout/admin-layout.component';
 
+import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { LocalAuthComponent } from './auth/auth-local/auth-local.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -40,7 +41,7 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'auth',
+    path: '',
     component: AuthLayoutComponent,
     children: [
       {
@@ -53,6 +54,11 @@ const routes: Routes = [
         component: RegisterComponent,
         data: { title: 'Register', titleI18n: 'register' },
       },
+      {
+        path: 'password_reset',
+        component: ForgotPasswordComponent,
+        data: { title: 'Register', titleI18n: 'register' },
+      }
     ],
   },  
   { path: '**', redirectTo: 'dashboard' }  

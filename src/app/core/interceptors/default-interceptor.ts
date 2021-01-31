@@ -5,10 +5,11 @@ import { Observable, of, throwError } from 'rxjs';
 import { mergeMap, catchError } from 'rxjs/operators';
 
 import { ToastrService } from 'ngx-toastr';
+import { TokenService } from '@core/auth/token.service';
 
 @Injectable()
 export class DefaultInterceptor implements HttpInterceptor {
-  constructor(private router: Router, private toastr: ToastrService) {}
+  constructor(private router: Router, private toastr: ToastrService, private tokenService: TokenService) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // Add server host
@@ -19,11 +20,15 @@ export class DefaultInterceptor implements HttpInterceptor {
       return next.handle(req);
     }
 
+    if (url.includes('/label-service/') && req.method === "GET") {
+      return next.handle(req);
+    }
+
     // All APIs need JWT authorization
     const headers = {
       'Accept': 'application/json',
       //'Accept-Language': this.settings.language,
-      //'Authorization': `Bearer ${this.token.get().token}`,
+      'Authorization': `Bearer ${this.tokenService.get().token}`,
     };
 
     const newReq = req.clone({ url, setHeaders: headers, withCredentials: false });
@@ -59,7 +64,7 @@ export class DefaultInterceptor implements HttpInterceptor {
   private handleErrorReq(error: HttpErrorResponse): Observable<never> {
     switch (error.status) {
       case 401:
-        this.goto(`/auth/login`);
+        this.goto(`/login`);
         break;
       case 403:
       case 404:

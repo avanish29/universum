@@ -6,7 +6,7 @@
     "loginType": "default",
     "supportedLanguages": [
         {
-            "code" : "en-US",
+            "code" : "en_US",
             "label" : "English (US)",
             "dir" : "ltr",
             "isDefault" : true

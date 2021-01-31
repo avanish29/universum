@@ -1,3 +1,7 @@
+// Authentication
+export * from './auth/token.service';
+export * from './auth/auth.guard';
+
 // Bootstrap
 export * from './bootstrap/menu.service';
 export * from './bootstrap/startup.service';

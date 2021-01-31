@@ -2,6 +2,7 @@ import { Injectable, Inject, Optional } from '@angular/core';
 import { CanActivate, CanActivateChild, CanLoad, Route, ActivatedRouteSnapshot, RouterStateSnapshot, UrlSegment, Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 import { StartupService } from '@core/bootstrap/startup.service';
+import { TokenService } from './token.service';
 
 @Injectable({ providedIn: 'root'})
 export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
@@ -17,20 +18,20 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
     });
   }
 
-  private checkJWT(model: any, offset?: number): boolean {
+  private checkJWT(model: any): boolean {
     return !!model?.token;
   }
 
   private process(): boolean {
     let redirectURL : string = this.LOGIN_URL + this.startupService.getSystemLoginType();
-    const res = true;
+    const res = true;//this.checkJWT(this.token.get<any>());
     if (!res) {
       this.gotoLogin(redirectURL);
     }
     return res;
   }
 
-  constructor( private router: Router, @Optional() @Inject(DOCUMENT) private document: any, private startupService : StartupService ) {}
+  constructor( private router: Router, @Optional() @Inject(DOCUMENT) private document: any, private startupService : StartupService, private token: TokenService ) {}
 
   // lazy loading
   canLoad(route: Route, segments: UrlSegment[]): boolean {

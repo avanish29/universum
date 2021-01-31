@@ -1,15 +1,33 @@
-<page-header [title]="'admin.security.users.title'" [subtitle]="'admin.security.users.subtitle'" [helpText]="'admin.security.users.helptext'" [showBreadCrumb]="true"></page-header>
-
-<div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="5px">
-  <mat-button-toggle-group #group="matButtonToggleGroup" value="grid">
-    <mat-button-toggle value="grid" aria-label="Grid View" matTooltip="Grid View">
-      <mat-icon>view_list</mat-icon>
-    </mat-button-toggle>
-    <mat-button-toggle value="tiles" aria-label="Tiles View" matTooltip="Tiles View">
-      <mat-icon>view_module</mat-icon>
-    </mat-button-toggle>
-  </mat-button-toggle-group>
+<div fxLayout="row wrap" fxLayout.lt-sm="column">
+  <div fxFlex="0 1 calc(80%)" fxLayoutAlign="flex-start">
+    <page-header fxFlex="100" [title]="'admin.security.users.title'" [subtitle]="'admin.security.users.subtitle'" [showBreadCrumb]="true"></page-header>
+  </div>
+  <div fxFlex="0 1 calc(20%)" fxLayoutAlign="flex-end">
+    <div style="display: block; padding: 16px; margin: -16px -16px 16px;">
+      <button mat-raised-button color="primary"> <mat-icon>add</mat-icon> CREATE USER</button>
+    </div>
+  </div>
 </div>
+
+<form class="form-field-full " [formGroup]="userSearchForm">
+  <div fxLayout="row wrap" fxLayout.lt-sm="column">
+    <div fxFlex="0 1 calc(70%)" fxLayoutAlign="flex-start">
+      <mat-form-field appearance="outline" fxFlex="100">
+        <mat-label>Search for users</mat-label>
+        <input matInput placeholder="Search for users" formControlName="query">
+        <mat-icon matSuffix class="dull-icon">search</mat-icon>
+      </mat-form-field>
+    </div>
+    <div fxFlex="0 1 calc(30%)" fxLayoutAlign="flex-start">
+      <mat-form-field appearance="outline" fxFlex="100">
+        <mat-label>Search by</mat-label>
+        <mat-select [formControl]="searchby">
+          <mat-option *ngFor="let searchByField of searchByFields" [ngValue]="searchby" [value]="searchByField.value">{{searchByField.label}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+</form>
 
 <div class="example-container mat-elevation-z8">
     <div class="example-loading-shade" *ngIf="isLoadingResults || isRateLimitReached">

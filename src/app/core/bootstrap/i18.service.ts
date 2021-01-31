@@ -7,12 +7,12 @@ import { environment } from './../../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class I18Service implements TranslateLoader {
-  I18_SERVICE_URL : string = environment.i18_service_url;
+  API_BASE_URL : string = environment.api_base_url;
 
   constructor( private http: HttpClient) {}
 
   getTranslation(lang: string): Observable<any> {
-    return this.http.get(this.I18_SERVICE_URL  + `${lang}.json?_t=` + Date.now()).pipe(map((response: JSON) => {      
+    return this.http.get(this.API_BASE_URL  + `messages/${lang}`).pipe(map((response: JSON) => {      
       return response;
     }),
     publishReplay(1),
