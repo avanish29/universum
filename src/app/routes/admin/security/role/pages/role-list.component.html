@@ -1,13 +1,19 @@
-<page-header [title]="'admin.security.roles.title'" [subtitle]="'admin.security.roles.subtitle'"
-    [showBreadCrumb]="true"></page-header>
+<div fxLayout="row wrap" fxLayout.lt-sm="column" class="universum-page-toolbar">
+    <div fxFlex="0 1 calc(65%)" fxLayoutAlign="flex-start">
+        <page-header [title]="'admin.security.roles.title'" [subtitle]="'admin.security.roles.subtitle'" [showBreadCrumb]="true"></page-header>
+    </div>
 
-<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px" style="margin-bottom: 10px;">
-    <button mat-raised-button aria-label="Add new role">
-        <mat-icon>add</mat-icon> <span>Add role</span>
-    </button>
-    <button mat-raised-button aria-label="Reload grid" (click)="loadRoles()">
-        <mat-icon>refresh</mat-icon> <span>Refresh</span>
-    </button>
+    <div fxFlex="0 1 calc(35%)" fxLayoutAlign="flex-end">
+        <div style="display: block; padding-top: 20px;">
+            <button mat-raised-button color="primary" (click)="openAddDialog()" [disabled]="isLoadingResults"> <mat-icon>add</mat-icon> {{'admin.security.roles.button.add.label' | translate}} </button>
+        </div>
+        <div style="display: block; padding-top: 20px; margin-left:5px;">
+            <button mat-raised-button aria-label="Reload grid" [disabled]="selection.selected.length === 0 || isLoadingResults" (click)="onDeleteAction()"> <mat-icon>delete</mat-icon> {{'admin.security.roles.button.delete.label' | translate}} </button>
+        </div>
+        <div style="display: block; padding-top: 20px; margin-left:5px;">
+            <button mat-raised-button aria-label="Reload grid" (click)="loadRoles()" [disabled]="isLoadingResults"> <mat-icon>refresh</mat-icon> {{'admin.security.roles.button.refresh.label' | translate}} </button>
+        </div>
+    </div>
 </div>
 
 <div class="table-container-wrap mat-elevation-z8">
@@ -31,7 +37,8 @@
                     <mat-checkbox (click)="$event.stopPropagation()"
                                     (change)="$event ? selection.toggle(row) : null"
                                     [checked]="selection.isSelected(row)"
-                                    [aria-label]="checkboxLabel(row)">
+                                    [aria-label]="checkboxLabel(row)"
+                                    [disabled]="row.isSystem">
                     </mat-checkbox>
                 </td>
             </ng-container>
@@ -39,7 +46,7 @@
             <ng-container matColumnDef="editaction">
                 <th mat-header-cell *matHeaderCellDef></th>
                 <td mat-cell *matCellDef="let row">
-                    <button mat-icon-button>
+                    <button type="button" mat-icon-button routerLink="/admin/roles/{{row.id}}">
                         <mat-icon>launch</mat-icon>
                     </button>
                 </td>

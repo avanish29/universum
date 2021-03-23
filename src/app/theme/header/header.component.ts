@@ -1,4 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
+import { TokenService } from '@core';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import * as screenfull from 'screenfull';
 
 @Component({
@@ -9,6 +12,11 @@ import * as screenfull from 'screenfull';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent implements OnInit {
+  loginUnsubscribe$: Subject<boolean> = new Subject();  
+  firstName: String = "";
+  lastName: String = "";
+  avatar: String= "";
+  
   @Input() showToggle = false;
   @Input() showBranding = false;
 
@@ -21,9 +29,22 @@ export class HeaderComponent implements OnInit {
     return screenfull as screenfull.Screenfull;
   }
 
-  constructor() {}
+  constructor(private token: TokenService) {
+  }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.token.change.pipe(takeUntil(this.loginUnsubscribe$))
+      .subscribe(token => {
+        if(token && Object.keys(token).length !== 0) {
+          this.firstName = token.firstName;
+          this.lastName = token.lastName;
+          this.avatar = token.avatar;
+          this.isLoggedIn = true;
+        } else {
+          this.isLoggedIn = false;
+        }
+    });
+  }
 
   toggleFullscreen() {
     if (this.screenfull.isEnabled) {

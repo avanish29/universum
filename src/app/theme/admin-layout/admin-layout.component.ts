@@ -55,7 +55,7 @@ export class AdminLayoutComponent implements OnInit, OnDestroy {
   constructor(private router: Router, private breakpointObserver: BreakpointObserver, private overlay: OverlayContainer,
     private element: ElementRef, private startupService: StartupService, @Optional() @Inject(DOCUMENT) private document: Document,
     @Inject(Directionality) public dir: AppDirectionality ) {
-      this.dir.value = this.selectedLanguage.dir === 'ltr' ? 'ltr' : 'rtl';
+      this.dir.value = this.selectedLanguage.dir === 'LTR' ? 'ltr' : 'rtl';
       this.document.body.dir = this.dir.value;
 
     this.layoutChangesSubscription = this.breakpointObserver
@@ -84,7 +84,7 @@ export class AdminLayoutComponent implements OnInit, OnDestroy {
         .subscribe(currentLang => {
           if(currentLang) {
             this.selectedLanguage = currentLang;
-            this.dir.value = this.selectedLanguage.dir === 'ltr' ? 'ltr' : 'rtl';
+            this.dir.value = this.selectedLanguage.dir === 'LTR' ? 'ltr' : 'rtl';
             this.document.body.dir = this.dir.value;
           }
         });

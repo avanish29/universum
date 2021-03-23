@@ -8,9 +8,15 @@
             <div fxFlex="100" fxFlex.lt-md="100">
                 <mat-card-title class="text-center m-b-24">{{'login.title' | translate}}</mat-card-title>
             </div>
+            <div class="alert alert-danger alert-dismissible fade" role="alert" *ngIf="errorMsg?.length > 0">
+                <span class="alert-msg">{{ errorMsg }}</span>
+                <button mat-icon-button matSuffix aria-label="Close" (click)="closeAlert()">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </div>
         </mat-card-header>
 
-        <form class="form-field-full" [formGroup]="localLoginForm">
+        <form class="form-field-full" [formGroup]="localLoginForm" (ngSubmit)="login()">
             <mat-card-content>
                 <div fxLayout="row wrap" fxLayoutGap="8px grid">
                     <div fxFlex="100" fxFlex.lt-md="100">
@@ -25,14 +31,14 @@
                         <mat-form-field appearance="outline">
                             <mat-label>{{'login.password.label' | translate}}</mat-label>
                             <input matInput placeholder="{{'login.password.placeholder' | translate}}" [type]="hidePassword ? 'password' : 'text'" formControlName="password" required>
-                            <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
+                            <button type="button" mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
                                 <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
                             </button>
                             <mat-error *ngIf="password.invalid">{{'login.password.required' | translate }}</mat-error>
                         </mat-form-field>
                     </div>
 
-                    <div fxFlex="100" fxFlex.lt-md="100" [innerHTML]="'login.button.registration.label' | translate"></div>
+                    <div fxFlex="100" fxFlex.lt-md="100" [innerHTML]="'login.button.registration.label' | translate" *ngIf="isRegistartionEnabled()"></div>
                 </div>
             </mat-card-content>
 
@@ -45,11 +51,10 @@
                     </div>
 
                     <div fxLayout="row" fxFlex="50" fxFlex.lt-md="50" fxLayoutAlign="end center" >
-                        <button class="w-full" mat-raised-button color="primary" [disabled]="localLoginForm.invalid || loading" (click)="login()">{{'login.button.next.label' | translate}}</button>
+                        <button type="submit" class="w-full" mat-raised-button color="primary" [disabled]="localLoginForm.invalid || loading" (click)="login()">{{'login.button.next.label' | translate}}</button>
                     </div>
                 </div>
             </mat-card-actions>            
         </form>
-
     </mat-card>
 </div>

@@ -1,0 +1,54 @@
+<div fxLayout="row wrap" fxLayout.lt-sm="column" class="universum-page-toolbar">
+    <div fxFlex="0 1 calc(65%)" fxLayoutAlign="flex-start">
+        <page-header [title]="'admin.security.roles.title'" [subtitle]="'admin.security.roles.subtitle'" [showBreadCrumb]="true"></page-header>
+    </div>
+
+    <div fxFlex="0 1 calc(35%)" fxLayoutAlign="flex-end">
+        <div style="display: block; padding-top: 20px;">
+            <a mat-button routerLink="/admin/roles"><mat-icon>arrow_back</mat-icon> Back to List </a>
+        </div>
+    </div>
+</div>
+
+<div class="table-container-wrap mat-elevation-z8" fxLayout="row wrap" fxFlexFill fxLayout.lt-sm="column" fxLayoutGap="15px">
+    <mat-tab-group style="width: 100%;">
+        <mat-tab label="Settings">
+            <div class="matero-col" fxFlex="100">
+                <form class="form-field-full" [formGroup]="roleFormGroup" (ngSubmit)="saveRole()" style="padding: 16px;">
+                    <div fxLayout="row wrap" fxLayoutGap="8px grid">
+                        <div fxFlex="50" fxFlex.lt-md="100">
+                            <mat-form-field appearance="outline">
+                                <mat-label> Name </mat-label>
+                                <input matInput placeholder="" formControlName="name" cdkFocusInitial required>
+                                <mat-error *ngIf="roleFormGroup.controls.name.hasError('required')"> Role name is required. </mat-error>
+                                <mat-error *ngIf="roleFormGroup.controls.name.hasError('pattern')"> Role name can only use Letters, Numbers, Underscore. </mat-error>
+                                <mat-error *ngIf="roleFormGroup.controls.name.hasError('minlength') || roleFormGroup.controls.name.hasError('maxlength')"> Role name must be 5-250 characters. </mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div fxFlex="50" fxFlex.lt-md="100">
+                            <mat-form-field appearance="outline">
+                                <mat-label> Description </mat-label>
+                                <input matInput placeholder="" formControlName="description">
+                                <mat-error *ngIf="roleFormGroup.controls.description.hasError('maxlength')"> Role description must be 0-250 characters. </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div fxLayout="row wrap" fxLayoutAlign="flex-end">
+                       <button type="submit" mat-raised-button color="primary" [disabled]="roleFormGroup.invalid || loading" (click)="saveRole()"> <mat-icon>save</mat-icon> SAVE </button>
+                    </div>
+                </form>
+            </div>
+        </mat-tab>
+        <mat-tab label="Permissions">
+            <div class="matero-col" fxFlex="100">
+                Work In Progress
+            </div>
+        </mat-tab>
+        <mat-tab label="Users">
+            <div class="matero-col" fxFlex="100">
+                Work In Progress
+            </div>
+        </mat-tab>
+    </mat-tab-group>  
+</div>

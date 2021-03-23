@@ -1,0 +1,34 @@
+<h1 mat-dialog-title>New Role</h1>
+<mat-dialog-content class="no-scroll-content">
+    <div class="alert alert-danger alert-dismissible fade" role="alert" *ngIf="errorMsg?.length > 0">
+        <span class="alert-msg">{{ errorMsg }}</span>
+        <button mat-icon-button matSuffix aria-label="Close" (click)="closeAlert()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+    <form [formGroup]="addRoleFormGroup" class="form-field-full">
+        <div fxLayout="column wrap" fxLayoutGap="5px grid">
+            <div fxFlex="100">
+                <mat-form-field appearance="outline">
+                    <mat-label> Name </mat-label>
+                    <input matInput placeholder="" formControlName="name" cdkFocusInitial required>
+                    <mat-error *ngIf="addRoleFormGroup.controls.name.hasError('required')"> Role name is required. </mat-error>
+                    <mat-error *ngIf="addRoleFormGroup.controls.name.hasError('pattern')"> Role name can only use Letters, Numbers, Underscore. </mat-error>
+                    <mat-error *ngIf="addRoleFormGroup.controls.name.hasError('minlength') || addRoleFormGroup.controls.name.hasError('maxlength')"> Role name must be 5-250 characters. </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div fxFlex="100">
+                <mat-form-field appearance="outline">
+                    <mat-label> Description </mat-label>
+                    <input matInput placeholder="" formControlName="description">
+                    <mat-error *ngIf="addRoleFormGroup.controls.description.hasError('maxlength')"> Role description must be 0-250 characters. </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button type="submit" mat-raised-button color="primary" [disabled]="addRoleFormGroup.invalid || loading" (click)="onAddRole()">CREATE</button>
+    <button mat-button mat-dialog-close>CANCEL</button>
+</mat-dialog-actions>

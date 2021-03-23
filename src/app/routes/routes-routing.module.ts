@@ -34,6 +34,11 @@ const routes: Routes = [
         data: { title: 'Administration', titleI18n: 'admin' },
       },
       {
+        path: 'error',
+        loadChildren: () => import('./error/error.module').then(m => m.ErrorModule),
+        data: { title: 'Error', titleI18n: 'error' },
+      },
+      {
         path: 'pages/:pageName',
         loadChildren: () => import('./dynamic-pages/daynamic-pages.module').then(m => m.DynamicPagesModule),
         data: { title: '{pageName}', titleI18n: '{pageName}' },

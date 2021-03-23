@@ -15,7 +15,7 @@ import { ThemeModule } from './theme/theme.module';
 import { RoutesModule } from './routes/routes.module';
 import { SharedModule } from './shared/shared.module';
 
-
+import { FormlyModule } from '@ngx-formly/core';
 import { ToastrModule } from 'ngx-toastr';
 import { AppInitializerProviders } from '@core/initializers';
 import { HttpInterceptorProviders } from '@core/interceptors'
@@ -32,6 +32,7 @@ import { HttpInterceptorProviders } from '@core/interceptors'
     RoutesModule,
     SharedModule,
 
+    FormlyModule.forRoot(),
     ToastrModule.forRoot(),
     TranslateModule.forRoot({
       missingTranslationHandler: { provide: MissingTranslationHandler, useClass: UniversumMissingTranslationHandler },

@@ -4,9 +4,10 @@ import { AuthenticationResponse } from './auth-local.component';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { TokenService } from '@core';
+import { environment } from './../../../../environments/environment';
 
-const API_BASE_URL = 'http://gateway-service:9090';
-const LOGIN_PATH = '/authenticate';
+const API_BASE_URL = environment.api_base_url;
+const LOGIN_PATH = 'authenticate';
 
 @Injectable()
 export class LocalAuthService {
@@ -14,11 +15,14 @@ export class LocalAuthService {
 
   authenticate(userName: String, passWord: String): Observable<AuthenticationResponse> {
     const requestUrl = `${API_BASE_URL + LOGIN_PATH}`;
-    return this.http.post<AuthenticationResponse>(requestUrl, { 'username': userName, 'password': passWord})
+    return this.http.post<AuthenticationResponse>(requestUrl, { 'username': userName, 'password': passWord}, { observe: 'response' })
     .pipe(map(response => {
-        const tokenModel : any = { token: response.authToken };
+        const tokenModel : any = { token: response.headers.get('Authorization'), 
+                                   firstName:  response.body.firstName, 
+                                   lastName: response.body.lastName, 
+                                   avatar: response.body.picture};
         this.tokenService.set(tokenModel);
-        return response;
+        return response.body;
     }));
   }
 }

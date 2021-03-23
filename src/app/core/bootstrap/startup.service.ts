@@ -9,16 +9,17 @@ import { environment } from './../../../environments/environment';
 export interface SupportedLanguage {
     code: string;
     label: string;
-    dir: 'ltr' | 'rtl';
+    dir: 'LTR' | 'RTL';
     isDefault: boolean;
 }
 
 export interface SystemSetting {
-    dir?: 'ltr' | 'rtl';
+    dir?: 'LTR' | 'RTL';
     theme?: 'light' | 'dark';
     menuPosition?: 'side' | 'top';
     sidenavOpened: boolean;
     sidenavCollapsed: boolean;
+    registrationEnabled: boolean;
     headerPos: 'above' | 'fixed' | 'static';
     formFieldAppearance: 'legacy' | 'standard' | 'fill' | 'outline';
     loginType: 'default' | 'sso' | 'ldap' | 'okta';
@@ -64,6 +65,10 @@ export class StartupService {
             }
             );
         });
+    }
+
+    get registrationEnabled() {
+        return this.settings.registrationEnabled;
     }
 
     getAllLanguages() : SupportedLanguage[] {

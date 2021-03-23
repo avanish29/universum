@@ -22,7 +22,7 @@ export class AuthLayoutComponent implements OnInit {
   constructor(private startupService : StartupService,
     @Optional() @Inject(DOCUMENT) private document: Document,
     @Inject(Directionality) public dir: AppDirectionality) {
-      this.dir.value = this.selectedLanguage.dir === 'ltr' ? 'ltr' : 'rtl';
+      this.dir.value = this.selectedLanguage.dir === 'LTR' ? 'ltr' : 'rtl';
       this.document.body.dir = this.dir.value;
     }
 
@@ -32,7 +32,7 @@ export class AuthLayoutComponent implements OnInit {
         .subscribe(currentLang => {
           if(currentLang) {
             this.selectedLanguage = currentLang;
-            this.dir.value = this.selectedLanguage.dir === 'ltr' ? 'ltr' : 'rtl';
+            this.dir.value = this.selectedLanguage.dir === 'LTR' ? 'ltr' : 'rtl';
             this.document.body.dir = this.dir.value;
           }
         });

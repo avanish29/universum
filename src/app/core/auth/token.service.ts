@@ -11,7 +11,7 @@ const TOKEN_KEY = 'jwt';
   providedIn: 'root',
 })
 export class TokenService {
-  private change$ = new BehaviorSubject(null);
+  private change$ : BehaviorSubject<TokenModel> = new BehaviorSubject<TokenModel>(null);
 
   /**
    * The referrer of current page
@@ -20,9 +20,18 @@ export class TokenService {
     return this._referrer;
   }
 
+  get change() {
+    return this.change$.asObservable();
+  }
+
   private _referrer: AuthReferrer = {};
 
-  constructor(private store: LocalStorageService) {}
+  constructor(private store: LocalStorageService) {
+    const data = this.get();
+    if(data !== null && Object.keys(data).length !== 0) {
+      this.set(data);
+    }
+  }
 
   set(data: TokenModel): boolean {
     this.change$.next(data);
@@ -36,9 +45,6 @@ export class TokenService {
 
   clear() {
     this.store.remove(TOKEN_KEY);
-  }
-
-  change(): Observable<TokenModel | null> {
-    return this.change$.pipe(share());
+    this.set(null);
   }
 }

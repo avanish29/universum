@@ -1,14 +1,17 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { OnInit, Component } from '@angular/core';
+import { OnInit, Component, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-import { MenuService } from '@core';
+import { MenuService, StartupService, SupportedLanguage } from '@core';
+import { TranslateService } from '@ngx-translate/core';
 import { first } from 'rxjs/operators';
 import { LocalAuthService } from './auth-local.service';
 
 export interface AuthenticationResponse {
-  authToken: String;
+  userName: String;
+  firstName: String;
+  lastName: String;
+  picture: String;
 }
 
 @Component({
@@ -21,14 +24,18 @@ export class LocalAuthComponent implements OnInit {
   hidePassword: boolean = true;
   localLoginForm: FormGroup;
   loading: boolean = false;
-  errorMsg: String = "Incorrect username or password.";
+  errorMsg: String = "";
+  langs : Array<SupportedLanguage>;
+  currentLang : string;
 
-  constructor(private formBuilder: FormBuilder, private router: Router, 
-      private menuService: MenuService, private remoteSrv: LocalAuthService, private toastr: ToastrService) {
-    this.localLoginForm = this.formBuilder.group({
-      username: ['', [Validators.required]],
-      password: ['', [Validators.required]],
-    });
+  constructor(private formBuilder: FormBuilder, private router: Router, private startupService: StartupService, private translate: TranslateService,
+      private menuService: MenuService, private remoteSrv: LocalAuthService) {
+        this.currentLang = this.startupService.getCurrentLanguage().code;
+        this.langs = this.startupService.getAllLanguages();
+        this.localLoginForm = this.formBuilder.group({
+          username: ['', [Validators.required]],
+          password: ['', [Validators.required]],
+        });
   }
 
   ngOnInit(): void { }
@@ -41,19 +48,38 @@ export class LocalAuthComponent implements OnInit {
     return this.localLoginForm.get('password');
   }
 
-  login() {
-    this.loading = true;
+  isRegistartionEnabled(): boolean {
+    return this.startupService.registrationEnabled;
+  }
+
+  closeAlert() {
     this.errorMsg = "";
-    this.remoteSrv.authenticate(this.localLoginForm.controls.username.value, this.localLoginForm.controls.password.value).pipe(first()).subscribe({
-      next: () => {
-        this.menuService.loadMenu().then(() => {
-          this.router.navigateByUrl('/');
-        });
-      },
-      error: (errorResp: HttpErrorResponse) => {
-        this.toastr.error(errorResp.error.message, 'Error');
-        this.loading = false;
-      }
-    });
+  }
+
+  login() {
+    if(this.localLoginForm.valid) {
+      this.loading = true;
+      this.errorMsg = "";
+      this.remoteSrv.authenticate(this.localLoginForm.controls.username.value, this.localLoginForm.controls.password.value).pipe(first()).subscribe({
+        next: () => {
+          this.menuService.loadMenu().then(() => {
+            this.router.navigateByUrl('/');
+          });
+        },
+        error: (errorResp: HttpErrorResponse) => {
+          this.errorMsg = errorResp.error.message;
+          this.loading = false;
+        }
+      });
+    }
+  }
+
+  onLanguageChange(): void {
+    this.useLanguage(this.currentLang);
+  }
+
+  useLanguage(language: string) {
+    this.translate.use(language);
+    this.startupService.setCurrentLanguage(language);
   }
 }

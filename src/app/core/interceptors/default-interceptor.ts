@@ -16,7 +16,7 @@ export class DefaultInterceptor implements HttpInterceptor {
     const url = req.url;
 
     // Only intercept API url
-    if (!url.includes('/api/')) {
+    if (!url.includes('/services/')) {
       return next.handle(req);
     }
 
@@ -69,7 +69,7 @@ export class DefaultInterceptor implements HttpInterceptor {
       case 403:
       case 404:
       case 500:
-        this.goto(`/sessions/${error.status}`);
+        this.goto(`/error/${error.status}`);
         break;
       default:
         if (error instanceof HttpErrorResponse) {

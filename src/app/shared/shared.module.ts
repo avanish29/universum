@@ -9,12 +9,16 @@ import { NgProgressModule } from 'ngx-progressbar';
 import { NgProgressHttpModule } from 'ngx-progressbar/http';
 import { NgProgressRouterModule } from 'ngx-progressbar/router';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { FormlyModule } from '@ngx-formly/core';
+import { FormlyMaterialModule } from '@ngx-formly/material';
 import { ToastrModule } from 'ngx-toastr';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { PageHeaderComponent } from './components/page-header/page-header.component';
 import { ErrorCodeComponent } from './components/error-code/error-code.component';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { ConfirmDialogService } from './components/confirm-dialog/confirm-dialog.service';
 
 const THIRD_MODULES = [
   MaterialModule,
@@ -23,10 +27,12 @@ const THIRD_MODULES = [
   NgProgressRouterModule,
   NgProgressHttpModule,
   NgSelectModule,
+  FormlyModule,
+  FormlyMaterialModule,
   ToastrModule,
   TranslateModule
 ];
-const COMPONENTS = [ BreadcrumbComponent, PageHeaderComponent, ErrorCodeComponent ];
+const COMPONENTS = [ BreadcrumbComponent, PageHeaderComponent, ErrorCodeComponent, ConfirmDialogComponent ];
 const COMPONENTS_DYNAMIC = [];
 const DIRECTIVES = [];
 const PIPES = [];
@@ -45,5 +51,6 @@ const PIPES = [];
     ...PIPES,
   ],
   entryComponents: COMPONENTS_DYNAMIC,
+  providers: [ConfirmDialogService]
 })
 export class SharedModule {}
