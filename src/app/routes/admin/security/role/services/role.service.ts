@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Role } from '../models/role.model';
 import { Observable } from 'rxjs';
+import { environment } from 'environments/environment';
 
-const SECURITY_SERVICE_BASE_URL = 'http://gateway-service:9090/services/security';
-const ROLES_PATH = SECURITY_SERVICE_BASE_URL + '/roles';
-const ROLE_BY_ID_PATH = ROLES_PATH + '/${roleId}';
+const API_BASE_URL : string = environment.api_base_url;
+const ROLES_PATH = API_BASE_URL + 'api/admin/security/roles';
 
 @Injectable()
 export class RoleDataService {

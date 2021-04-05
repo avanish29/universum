@@ -2,25 +2,21 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest,  HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
-import { mergeMap, catchError } from 'rxjs/operators';
+import { mergeMap, catchError, finalize } from 'rxjs/operators';
 
-import { ToastrService } from 'ngx-toastr';
 import { TokenService } from '@core/auth/token.service';
+import { NotificationService } from '@core/services/notification.service';
 
 @Injectable()
 export class DefaultInterceptor implements HttpInterceptor {
-  constructor(private router: Router, private toastr: ToastrService, private tokenService: TokenService) {}
+  constructor(private router: Router, private notificationService: NotificationService, private tokenService: TokenService) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // Add server host
     const url = req.url;
 
     // Only intercept API url
-    if (!url.includes('/services/')) {
-      return next.handle(req);
-    }
-
-    if (url.includes('/label-service/') && req.method === "GET") {
+    if (!url.includes('/api/')) {
       return next.handle(req);
     }
 
@@ -44,20 +40,6 @@ export class DefaultInterceptor implements HttpInterceptor {
   }
 
   private handleOkReq(event: HttpEvent<any>): Observable<any> {
-    /*if (event instanceof HttpResponse) {
-      const body: any = event.body;
-      // failure: { code: **, msg: 'failure' }
-      // success: { code: 0,  msg: 'success', data: {} }
-      if (body && body.code !== 0) {
-        if (body.msg && body.msg !== '') {
-          this.toastr.error(body.msg);
-        }
-        return throwError([]);
-      } else {
-        return of(event);
-      }
-    }*/
-    // Pass down event if everything is OK
     return of(event);
   }
 
@@ -72,10 +54,11 @@ export class DefaultInterceptor implements HttpInterceptor {
         this.goto(`/error/${error.status}`);
         break;
       default:
-        if (error instanceof HttpErrorResponse) {
+        console.error('ERROR', error);
+        /* if (error instanceof HttpErrorResponse) {
           console.error('ERROR', error);
-          this.toastr.error(error.error.msg || `${error.status} ${error.statusText}`);
-        }
+          this.notificationService.showError(error.error.message || `${error.status} ${error.statusText}`);
+        } */
         break;
     }
     return throwError(error);

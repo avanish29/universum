@@ -1,0 +1,129 @@
+<div fxLayout="row wrap" fxLayout.lt-sm="column" >
+    <div fxFlex="0 1 calc(65%)" fxLayoutAlign="flex-start">
+        <page-header [title]="'admin.labels.title'" [subtitle]="'admin.labels.subtitle'" [showBreadCrumb]="true"></page-header>
+    </div>
+
+    <div fxFlex="0 1 calc(35%)" fxLayoutAlign="flex-end">
+        <div style="display: block; padding-top: 20px;">
+            <button mat-raised-button aria-label="add label" color="primary" (click)="openDialog(null)" [disabled]="isLoadingResults"> <mat-icon>add</mat-icon> {{'admin.labels.button.add.label' | translate}} </button>
+        </div>
+    </div>
+</div>
+
+<div fxLayout="row wrap" fxLayoutGap="8px grid">
+    <div fxFlex="50" fxFlex.lt-md="100">
+        <mat-form-field appearance="outline" class="language-field">
+            <mat-label> Language </mat-label>
+            <mat-select placeholder="State" (selectionChange)="onLanguageChange($event.value)" [(value)]="selectedLanguage">
+                <mat-option *ngFor="let language of languages" [value]="language">
+                    {{ language.label }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div fxFlex="50" fxFlex.lt-md="100">
+        <div class="actions-flex-container">
+            <button mat-icon-button color="primary" aria-label="add language" matTooltip="Click to Add Language" (click)="openLanguageDialog(null)">
+                <mat-icon>add_box</mat-icon>
+            </button>
+            <span *ngIf="selectedLanguage && selectedLanguage.isDefault === false">
+                <button mat-icon-button aria-label="edit selected language" matTooltip="Click to Edit Language" class="iconbutton" color="primary" (click)="openLanguageDialog(selectedLanguage)">
+                    <mat-icon>mode_edit</mat-icon>
+                </button>
+                <button mat-icon-button aria-label="delete selected language" matTooltip="Click to Delete Language" class="iconbutton" color="warn" (click)="onDeleteLanguage()">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </span>
+        </div>
+    </div>
+</div>
+
+<div class="table-container-wrap mat-elevation-z8">
+    <div class="table-loading-shade" *ngIf="isLoadingResults">
+        <mat-progress-bar mode="query" *ngIf="isLoadingResults"></mat-progress-bar>
+    </div>
+
+    <div class="table-container">
+        <form [formGroup]="searchForm" class="form-field-full">
+            <table aria-describedby="Label List" mat-table [dataSource]="dataSource" matSort matSortActive="labelKey" matSortDisableClear matSortDirection="asc">
+                <!-- Label Key Column -->
+                <ng-container matColumnDef="labelKey">
+                    <th scope="col" id="labelKey" mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+                        {{'admin.labels.listview.columns.labelkey.label' | translate}}
+                    </th>
+                    <td mat-cell *matCellDef="let row">{{row.labelKey}}</td>
+                </ng-container>
+
+                <!-- Label Value Column -->
+                <ng-container matColumnDef="labelValue">
+                    <th scope="col" id="labelValue" mat-header-cell *matHeaderCellDef disableClear>
+                        {{'admin.labels.listview.columns.labelValue.label' | translate}}
+                    </th>
+                    <td mat-cell *matCellDef="let row">{{row.labelValue}}</td>
+                </ng-container>
+
+                <!-- Actions Column -->
+                <ng-container matColumnDef="actions">
+                    <th scope="col" id="masterToggle" mat-header-cell *matHeaderCellDef>
+                    </th>
+                    <td mat-cell *matCellDef="let row">
+                        <button mat-icon-button aria-label="Click to Edit" matTooltip="Click to Edit" (click)="openDialog(row)" class="iconbutton" color="primary">
+                            <mat-icon aria-label="Edit">edit</mat-icon>
+                        </button>
+                        |
+                        <button mat-icon-button aria-label="Click to Delete" matTooltip="Click to Delete" (click)="onDeleteLabel(row)" class="iconbutton" color="warn">
+                            <mat-icon aria-label="Delete">delete</mat-icon>
+                        </button> 
+                    </td>
+                </ng-container>
+
+                <!-- Filter for Label Key -->
+                <ng-container matColumnDef="labelKey-filter">
+                    <th scope="col" mat-header-cell *matHeaderCellDef>
+                        <mat-form-field  appearance="outline" class="filter-form-field">
+                            <input matInput type="text" formControlName="labelKey" >
+                            <button mat-button  matSuffix mat-icon-button aria-label="Clear" [disabled] = "!searchForm.get('labelKey').value " (click)="searchForm.get('labelKey').setValue('')">
+                                <mat-icon> {{ searchForm.get('labelKey').value ? 'close' : 'filter_alt' }}</mat-icon>
+                            </button>
+                        </mat-form-field>
+                    </th>
+                </ng-container>
+
+                <!-- Filter for Label Value -->
+                <ng-container matColumnDef="labelValue-filter">
+                    <th scope="col" mat-header-cell *matHeaderCellDef>
+                        <mat-form-field  appearance="outline" class="filter-form-field">
+                            <input matInput type="text" formControlName="labelValue" >
+                            <button mat-button  matSuffix mat-icon-button aria-label="Clear" [disabled] = "!searchForm.get('labelValue').value " (click)="searchForm.get('labelValue').setValue('')">
+                                <mat-icon> {{ searchForm.get('labelValue').value ? 'close' : 'filter_alt' }}</mat-icon>
+                            </button>
+                        </mat-form-field>
+                    </th>
+                </ng-container>
+
+                <!-- Header row first group -->
+                <ng-container matColumnDef="id-filter">
+                    <th scope="col" mat-header-cell *matHeaderCellDef >    
+                    </th>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns" class="example-first-header-row"></tr>
+                <tr mat-header-row *matHeaderRowDef="['labelKey-filter', 'labelValue-filter', 'id-filter']" class="example-second-header-row"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+        </form>
+        <table aria-describedby="No Records">
+            <tr>
+                <th scope="col"></th>
+            </tr>
+            <tr *ngIf="!dataSource.data.length" class="nodata-row">
+                <td style="text-align: center;" [attr.colspan]="displayedColumns.length">
+                    {{ 'core.listview.norecords.label' | translate }}
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <mat-paginator [length]="resultsLength" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 50, 100]" showFirstLastButtons></mat-paginator>
+</div>

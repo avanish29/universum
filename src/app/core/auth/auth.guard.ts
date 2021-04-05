@@ -6,7 +6,7 @@ import { TokenService } from './token.service';
 
 @Injectable({ providedIn: 'root'})
 export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
-  LOGIN_URL : string = '/auth/';
+  LOGIN_URL : string = '/login';
 
   private gotoLogin(url?: string) {
     setTimeout(() => {
@@ -23,8 +23,8 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
   }
 
   private process(): boolean {
-    let redirectURL : string = this.LOGIN_URL + this.startupService.getSystemLoginType();
-    const res = true;//this.checkJWT(this.token.get<any>());
+    let redirectURL : string = this.LOGIN_URL;
+    const res = this.checkJWT(this.token.get<any>());
     if (!res) {
       this.gotoLogin(redirectURL);
     }

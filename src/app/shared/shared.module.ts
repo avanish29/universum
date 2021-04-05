@@ -20,6 +20,9 @@ import { ErrorCodeComponent } from './components/error-code/error-code.component
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { ConfirmDialogService } from './components/confirm-dialog/confirm-dialog.service';
 
+import { FormDialogComponent } from './components/form-dialog/form.dialog.component';
+import { FormDialogService } from './components/form-dialog/form.dialog.service';
+
 const THIRD_MODULES = [
   MaterialModule,
   FlexLayoutModule,
@@ -32,7 +35,7 @@ const THIRD_MODULES = [
   ToastrModule,
   TranslateModule
 ];
-const COMPONENTS = [ BreadcrumbComponent, PageHeaderComponent, ErrorCodeComponent, ConfirmDialogComponent ];
+const COMPONENTS = [ BreadcrumbComponent, PageHeaderComponent, ErrorCodeComponent, ConfirmDialogComponent, FormDialogComponent ];
 const COMPONENTS_DYNAMIC = [];
 const DIRECTIVES = [];
 const PIPES = [];
@@ -51,6 +54,6 @@ const PIPES = [];
     ...PIPES,
   ],
   entryComponents: COMPONENTS_DYNAMIC,
-  providers: [ConfirmDialogService]
+  providers: [ConfirmDialogService, FormDialogService]
 })
 export class SharedModule {}

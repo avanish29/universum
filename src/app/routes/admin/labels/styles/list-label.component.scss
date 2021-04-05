@@ -1,0 +1,38 @@
+.search {
+    &__form {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: left;
+  
+      &_field {
+        width: 100%;
+      }
+    }
+    &__table {
+      margin: 0 18px 18px 18px;
+    }
+}
+  
+table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+.mat-column-select {flex: 0 0 10%; width: 10%;}
+.mat-column-labelKey {flex: 0 0 50%; width: 40%;} 
+.mat-column-labelValue {flex: 0 0 50%; white-space: normal; word-wrap: break-word; max-width: 700px; width: 50%;}
+
+.example-first-header-row th {
+  border-bottom: none;
+}
+
+.actions-flex-container {
+  padding-top: 15px;
+}
+
+.language-field {width: 100%;}
+
+.filter-form-field {
+  width: 80%;
+}  
+  

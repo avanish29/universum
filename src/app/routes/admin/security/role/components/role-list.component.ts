@@ -21,7 +21,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class RoleListComponent implements AfterViewInit {
     query: string = "name:abc";
-    displayedColumns: string[] = ['select', 'editaction', 'id', 'created', 'name', 'description', 'isSystem'];
+    displayedColumns: string[] = ['select', 'editaction', 'created', 'name', 'description', 'isSystem'];
     data: Role[] = [];
     selection = new SelectionModel<Role>(true, []);
   

@@ -7,8 +7,7 @@ import { RoleDataService } from '../services/role.service';
 
 @Component({
     selector: 'add-role-dialog',
-    templateUrl: '../pages/role-add-dialog.component.html',
-    providers: [RoleDataService]
+    templateUrl: '../pages/role-add-dialog.component.html'
 })
 export class AddRoleDialog {
     addRoleFormGroup: FormGroup;

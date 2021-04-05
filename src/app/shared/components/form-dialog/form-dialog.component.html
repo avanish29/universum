@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>{{formData.title}}</h1>
+<form [formGroup]="form" class="form-field-full" (ngSubmit)="onSubmit()">
+    <mat-dialog-content class="no-scroll-content">
+        <div class="alert alert-danger alert-dismissible fade" role="alert" *ngIf="errorMsg?.length > 0">
+            <span class="alert-msg">{{ errorMsg }}</span>
+            <button mat-icon-button matSuffix aria-label="Close" (click)="closeAlert()">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+    
+        <formly-form [model]="formData.model" [fields]="formData.formFields" [options]="formData.options" [form]="form"></formly-form>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button type="submit" mat-raised-button color="primary" [disabled]="form.invalid || loading" (click)="onSubmit()">SAVE</button>
+        <button mat-button mat-dialog-close (click)="onCancel()">CANCEL</button>
+    </mat-dialog-actions>
+</form>
